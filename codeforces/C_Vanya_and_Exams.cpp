@@ -19,19 +19,38 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    string s;
-    cin >> s;
-    int n = SZ(s);
-    int k;
-    cin >> k;
-    while (k > 0)
+    ll n, r, avg;
+    cin >> n >> r >> avg;
+    vector<pll> v;
+    ll total = 0;
+    for (int i = 0; i < n; i++)
     {
-        int bruh = 0;
-        for (int i = 0; i < n - 1; i++)
-        {
-                }
+        ll a, b;
+        cin >> a >> b;
+        v.pb(mp(b, a));
+        total += a;
     }
-    cout << s;
+
+    sort(all(v));
+    ll counts = 0;
+    ll curr = 0;
+    while (total < avg * n)
+    {
+        if (total + (r - v[curr].se) < avg * n)
+        {
+            total += (r - v[curr].se);
+            counts += (r - v[curr].se) * v[curr].fi;
+        }
+        else
+        {
+            counts += (avg * n - total) * v[curr].fi;
+            break;
+        }
+
+        curr++;
+    }
+
+    cout << counts;
 }
 int main()
 {

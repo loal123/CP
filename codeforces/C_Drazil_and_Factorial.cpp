@@ -27,23 +27,41 @@ void solve()
     string s;
     cin >> s;
     int total = 1;
-    sort(s.begin(), s.end());
-    for (int i = 0; i < n; i++)
+    sort(s.rbegin(), s.rend());
+    int a[10] = {0};
+    for (auto i : s)
     {
-        int m = s[i] - '0';
-        total *= factorial(m);
-    }
-    int idk = 9;
-    while (total > 1)
-    {
-        if (total % factorial(idk) == 0)
+        if (i == '4')
         {
-            total /= factorial(idk) - 1;
-            cout << idk - 1;
+            a[3]++;
+            a[2] += 2;
+        }
+        else if (i == '6')
+        {
+            a[3]++;
+            a[5]++;
+        }
+        else if (i == '8')
+        {
+            a[7]++;
+            a[2] += 3;
+        }
+        else if (i == '9')
+        {
+            a[7]++;
+            a[2]++;
+            a[3] += 2;
         }
         else
         {
-            idk--;
+            a[i - '0']++;
+        }
+    }
+    for (int i = 9; i >= 2; i--)
+    {
+        for (int j = 0; j < a[i]; j++)
+        {
+            cout << i;
         }
     }
 }

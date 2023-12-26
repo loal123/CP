@@ -10,35 +10,23 @@ typedef long double ld;
 #define se second
 #define pb push_back
 #define mp make_pair
-#define all(v) (v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define SZ(x) ((int)((x).size()))
+#define pow2(x) ((ll)(x) * (x))
 const ll mod = 1e9 + 7;
+const int INF = 1e9 + 5;
+const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int a[26] = {0};
-    string s;
-    cin >> s;
-    for (auto i : s)
+    int n, m;
+    cin >> n >>> m;
+    for (int i = 0; i < n; i++)
     {
-        a[i - 'a']++;
     }
-    int odd = 0;
-    int even = 0;
-
-    for (int i = 0; i < 26; i++)
+    for (int i = 0; i < m; i++)
     {
-        if (a[i] % 2 == 1)
-            odd++;
-        else
-            even++;
     }
-    if (odd == 0)
-        cout << "First";
-
-    else if (odd % 2 == 0)
-        cout << "Second";
-    else
-        cout << "First";
 }
 int main()
 {

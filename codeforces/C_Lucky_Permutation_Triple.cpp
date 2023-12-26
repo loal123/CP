@@ -19,19 +19,27 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    string s;
-    cin >> s;
-    int n = SZ(s);
-    int k;
-    cin >> k;
-    while (k > 0)
+    int n;
+    cin >> n;
+    if (n % 2 == 0)
+        cout << -1;
+    else
     {
-        int bruh = 0;
-        for (int i = 0; i < n - 1; i++)
+        for (int i = 0; i < n; i++)
         {
-                }
+            cout << i << " ";
+        }
+        cout << '\n';
+        for (int i = 0; i < n; i++)
+        {
+            cout << i << " ";
+        }
+        cout << '\n';
+        for (int i = 0; i < n; i++)
+        {
+            cout << (i + i) % n << " ";
+        }
     }
-    cout << s;
 }
 int main()
 {

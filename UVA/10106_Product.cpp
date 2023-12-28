@@ -10,47 +10,44 @@ typedef long double ld;
 #define se second
 #define pb push_back
 #define mp make_pair
+
 const ll mod = 1e9 + 7;
+
 // Super is a cute girl
 void solve()
 {
     while (1)
     {
         string s1, s2;
-        bool has[500] = {false};
-        int a[500];
+
+        int a[600] = {0};
         if (!(cin >> s1))
             break;
         if (!(cin >> s2))
             break;
+
+        reverse(s1.begin(), s1.end());
+        reverse(s2.begin(), s2.end());
         for (int i = 0; i < s1.size(); i++)
         {
-            for (int i = 0; i < s2.size(); i++)
             {
-                int super = s1[i] - '0';
-                int girl = s2[i] - '0';
-                if (super * girl > 10)
+                for (int j = 0; j < s2.size(); j++)
                 {
-
-                    int flandre = super * girl;
-                    if (!has[i + i])
-                    {
-                        a[i + i] = flandre % 10;
-                        has[i + i] = true;
-                    }
-                    else
-                    {
-                    }
-
-                    flandre /= 10;
-                    a[i + i + 1] = flandre % 10;
-                    has[i + i + 1] = true;
-                }
-                else
-                {
+                    a[i + j] += (s1[i] - '0') * (s2[j] - '0');
                 }
             }
         }
+        for (int i = 0; i < 599; i++)
+        {
+            a[i + 1] += a[i] / 10;
+            a[i] %= 10;
+        }
+        int i = 599;
+        while (i > 0 && a[i] == 0)
+            i--;
+        for (; i >= 0; i--)
+            cout << a[i];
+        cout << '\n';
     }
 }
 int main()

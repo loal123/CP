@@ -21,6 +21,53 @@ void solve()
 {
     string s1;
     string s2;
+    cin >> s1 >> s2;
+    int yay = 0;
+    int whoops = 0;
+    int a[26] = {0};
+    int b[26] = {0};
+    int c[26] = {0};
+    int d[26] = {0};
+    for (auto i : s1)
+    {
+        if (i >= 'a' && i <= 'z')
+        {
+            a[i - 'a']++;
+        }
+        else
+            b[i - 'A']++;
+    }
+    for (auto i : s2)
+    {
+        if (i >= 'a' && i <= 'z')
+        {
+            c[i - 'a']++;
+        }
+        else
+            d[i - 'A']++;
+    }
+    for (int i = 0; i <= 25; i++)
+    {
+        int idk = min(a[i], c[i]);
+        int idkk = min(b[i], d[i]);
+        yay += idk;
+        yay += idkk;
+        a[i] -= idk;
+        b[i] -= idkk;
+        c[i] -= idk;
+        d[i] -= idkk;
+    }
+    for (int i = 0; i <= 25; i++)
+    {
+        int idk = min(a[i], d[i]);
+        int idkk = min(b[i], c[i]);
+        whoops += idk;
+        whoops += idkk;
+    }
+    cout << yay << " " << whoops;
+    {
+        /* code */
+    }
 }
 int main()
 {

@@ -17,44 +17,47 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-void solve()
+int memo[105][105];
+int n, k, d;
+int dp(int x, int depth, bool have)
+
 {
-    ll n, m, k;
-    cin >> n >> m >> k;
-    ll a[n + 2];
-    for (int i = 1; i <= n; i++)
+    ll add = 0;
+    if (x == 0)
     {
-        cin >> a[i];
+        if (have)
+            return 1;
+        else
+            return 0;
     }
-    ll diff[m + 2] = {0};
-    int left[m + 2], right[m + 2], increase[m + 2];
-    for (int i = 1; i <= m; i++)
-    {
-        cin >> left[i] >> right[i] >> increase[i];
-    }
+    if (x < 0)
+        return 0;
+    if (memo[x][depth] != -1)
+        return memo[x][depth];
+
     for (int i = 1; i <= k; i++)
     {
-        int x, y;
-        cin >> x >> y;
+        if (have || i >= d)
 
-        diff[x]++;
-        diff[y + 1]--;
+            add += dp(x - i, depth++, true);
+        else
+            add += dp(x - i, depth++, false);
+
+        add %= mod;
     }
-    ll q[n + 2] = {0};
+    memo[x][depth] = add;
 
-    for (int i = 1; i <= m; i++)
-    {
-        diff[i] += diff[i - 1];
+    return add;
+}
+void solve()
+{
 
-        q[left[i]] += increase[i] * diff[i];
-        q[right[i] + 1] -= increase[i] * diff[i];
-    }
+    cin >> n >> k >> d;
+    memset(memo, -1, sizeof(memo));
 
-    for (int i = 1; i <= n; i++)
-    {
-        q[i] += q[i - 1];
-        cout << a[i] + q[i] << " ";
-    }
+    cout << dp(n, 0, false);
+
+    
 }
 int main()
 {

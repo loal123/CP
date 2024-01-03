@@ -21,28 +21,32 @@ void solve()
 {
     int n;
     cin >> n;
-    vi v;
-    ll counts = 0;
-    bool can = false;
-    map<ll, ll> m;
-    m[0] = 1;
+    vector<pair<int, string>> a(n);
     for (int i = 0; i < n; i++)
     {
-        int z;
+        string z;
         cin >> z;
-        if (i % 2 == 1)
-            z = -z;
-
-        counts += z;
-        v.pb(counts);
-        if (m[counts])
-            can = true;
-        else
-            m[counts]++;
+        a[i].se = z;
+        a[i].fi = z.size();
     }
-
-    cout << (can ? "YES" : "NO");
-    cout << '\n';
+    sort(all(a));
+    vector<string> bruh;
+    for (auto i : a)
+        bruh.pb(i.se);
+    int zzz = -1;
+    int start = 0;
+    int counts = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (bruh[i].size() != zzz && bruh.size() != -1)
+        {
+            sort(bruh.begin() + start, bruh.begin() + start + counts);
+        }
+        else
+            counts++;
+    }
+    for (auto i : bruh)
+        cout << i << endl;
 }
 int main()
 {
@@ -50,8 +54,6 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

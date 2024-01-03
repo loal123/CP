@@ -21,28 +21,11 @@ void solve()
 {
     int n;
     cin >> n;
-    vi v;
-    ll counts = 0;
-    bool can = false;
-    map<ll, ll> m;
-    m[0] = 1;
-    for (int i = 0; i < n; i++)
+
+    for (int i = 10; i <= 33; i++)
     {
-        int z;
-        cin >> z;
-        if (i % 2 == 1)
-            z = -z;
-
-        counts += z;
-        v.pb(counts);
-        if (m[counts])
-            can = true;
-        else
-            m[counts]++;
+        cout << i * i << endl;
     }
-
-    cout << (can ? "YES" : "NO");
-    cout << '\n';
 }
 int main()
 {

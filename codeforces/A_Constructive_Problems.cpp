@@ -19,30 +19,9 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int n;
-    cin >> n;
-    vi v;
-    ll counts = 0;
-    bool can = false;
-    map<ll, ll> m;
-    m[0] = 1;
-    for (int i = 0; i < n; i++)
-    {
-        int z;
-        cin >> z;
-        if (i % 2 == 1)
-            z = -z;
-
-        counts += z;
-        v.pb(counts);
-        if (m[counts])
-            can = true;
-        else
-            m[counts]++;
-    }
-
-    cout << (can ? "YES" : "NO");
-    cout << '\n';
+    int n, k;
+    cin >> n >> k;
+    cout << max(n, k) << endl;
 }
 int main()
 {

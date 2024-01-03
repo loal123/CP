@@ -17,32 +17,28 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
+bool prime(ll x)
+{
+    for (int i = 2; i <= sqrt(x); i++)
+    {
+        if (x % i == 0)
+            return false;
+    }
+    return true;
+}
 void solve()
 {
-    int n;
-    cin >> n;
-    vi v;
-    ll counts = 0;
-    bool can = false;
-    map<ll, ll> m;
-    m[0] = 1;
-    for (int i = 0; i < n; i++)
+    ll a, b;
+    cin >> a >> b;
+    ll idk = a * b;
+    if (b % a == 0)
     {
-        int z;
-        cin >> z;
-        if (i % 2 == 1)
-            z = -z;
-
-        counts += z;
-        v.pb(counts);
-        if (m[counts])
-            can = true;
-        else
-            m[counts]++;
+        cout << b * (b / a);
     }
+    else
+        cout << idk / gcd(a, b);
 
-    cout << (can ? "YES" : "NO");
-    cout << '\n';
+    cout << endl;
 }
 int main()
 {

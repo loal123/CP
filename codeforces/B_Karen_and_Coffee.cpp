@@ -19,41 +19,35 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    ll n, m, k;
-    cin >> n >> m >> k;
-    ll a[n + 2];
+    ll n, k, q;
+    cin >> n >> k >> q;
+    ll left[n + 2];
+    ll right[n + 2];
+    int a[200001] = {0};
     for (int i = 1; i <= n; i++)
-    {
-        cin >> a[i];
-    }
-    ll diff[m + 2] = {0};
-    int left[m + 2], right[m + 2], increase[m + 2];
-    for (int i = 1; i <= m; i++)
-    {
-        cin >> left[i] >> right[i] >> increase[i];
-    }
-    for (int i = 1; i <= k; i++)
     {
         int x, y;
         cin >> x >> y;
-
-        diff[x]++;
-        diff[y + 1]--;
+        a[x]++;
+        a[y + 1]--;
     }
-    ll q[n + 2] = {0};
-
-    for (int i = 1; i <= m; i++)
+    for (int i = 1; i < 200001; i++)
     {
-        diff[i] += diff[i - 1];
-
-        q[left[i]] += increase[i] * diff[i];
-        q[right[i] + 1] -= increase[i] * diff[i];
+        a[i] += a[i - 1];
     }
-
-    for (int i = 1; i <= n; i++)
+    int b[200001] = {0};
+    int counts = 0;
+    for (int i = 1; i < 200001; i++)
     {
-        q[i] += q[i - 1];
-        cout << a[i] + q[i] << " ";
+        if (a[i] >= k)
+            counts++;
+        b[i] = counts;
+    }
+    for (int i = 0; i < q; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        cout << b[y] - b[x - 1] << '\n';
     }
 }
 int main()

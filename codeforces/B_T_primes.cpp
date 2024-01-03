@@ -17,32 +17,33 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
+bool check(ll x)
+{
+
+    if ((ll)sqrt(x) * sqrt(x) != x)
+        return false;
+    int idk = sqrt(x);
+    for (int i = 2; i <= sqrt(idk); i++)
+    {
+        if (idk % i == 0)
+            return false;
+    }
+
+    return true;
+}
 void solve()
 {
     int n;
     cin >> n;
-    vi v;
-    ll counts = 0;
-    bool can = false;
-    map<ll, ll> m;
-    m[0] = 1;
     for (int i = 0; i < n; i++)
     {
-        int z;
+        ll z;
         cin >> z;
-        if (i % 2 == 1)
-            z = -z;
-
-        counts += z;
-        v.pb(counts);
-        if (m[counts])
-            can = true;
+        if (z != 1)
+            cout << (check(z) ? "YES" : "NO") << '\n';
         else
-            m[counts]++;
+            cout << "NO" << '\n';
     }
-
-    cout << (can ? "YES" : "NO");
-    cout << '\n';
 }
 int main()
 {
@@ -50,8 +51,6 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

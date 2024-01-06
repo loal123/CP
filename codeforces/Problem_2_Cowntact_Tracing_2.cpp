@@ -41,66 +41,50 @@ void solve()
         {
             if (counts > 0)
             {
-
-                if (!have)
-                {
-                    v2.pb(mp(((counts + 2) / 2), counts));
-                }
-
-                else if (counts % 2 == 1)
-                    v.pb((counts + 2) / 2);
-                else
-                {
-                    can = false;
-                }
+                v.pb(counts);
                 counts = 0;
-                segments++;
             }
-            have = true;
         }
     }
-
+    // 011101
+    //  3 1
+    /*
+1
+    */
     if (counts > 0)
     {
 
-        v2.pb(mp((counts + 2) / 2, counts));
-        segments++;
+        v.pb(counts);
     }
-    if (v.size() > 1)
+    int infected = n;
+    for (int i = 1; i <= n; i += 2)
     {
-        for (int i = 0; i < v.size() - 1; i++)
-        {
-            if (v[i] != v[i + 1])
-            {
-                can = false;
-                break;
-            }
-        }
-    }
-    for (int i = 0; i < v2.size(); i++)
-    {
+        int temp = 0;
+        bool br = false;
+        // 3,2,3,2
         for (int j = 0; j < v.size(); j++)
         {
-            if (v[j] >= v2[i].fi && v[j] <= v2[i].se)
+            if ((j == 0 && s[0] == '1') || (j == SZ(v) - 1 && s[n - 1] == '1'))
             {
+                if (i > v[j] * 2 - 1)
+                    br = true;
             }
             else
-                can = false;
+            {
+                if (i > v[j])
+                    br = true;
+            }
+            if (br)
+                break;
+            temp += (v[j] + i - 1) / i;
         }
+
+        if (br)
+            break;
+
+        infected = min(infected, temp);
     }
-    if (v2.size() == 2)
-    {
-        for (int i = v2[0].fi; i <= v2[0].se; i++)
-        {
-            if (i >= v2[1].fi && i <= v2[1].se)
-            {
-            }
-            else
-                can = false;
-        }
-        }
-    int aaa = mt();
-    cout << (aaa % 2 == 0 ? segments : total);
+    cout << infected;
 }
 int main()
 {

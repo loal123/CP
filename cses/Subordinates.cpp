@@ -17,50 +17,34 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
+const int maxn = 2e5 + 5;
+vi adj[maxn];
+int employees[maxn];
+void dfs(int s)
 {
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
+    employees[s] = 1;
+    for (auto i : adj[s])
     {
-        return;
+        dfs(i);
+        employees[s] += employees[i];
     }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
 }
 
 void solve()
 {
-
-    cin >> n >> m;
-
+    int n;
+    cin >> n;
+    for (int i = 1; i < n; i++)
+    {
+        int b;
+        cin >> b;
+        adj[--b].pb(i);
+    }
+    dfs(0);
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> a[i][j];
-        }
+        cout << employees[i] - 1 << ' ';
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            if (a[i][j] == '.' && !visited[i][j])
-            {
-                floodfill(i, j);
-                ans++;
-            }
-        }
-    }
-    cout << ans;
 }
 int main()
 {

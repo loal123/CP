@@ -10,36 +10,37 @@ typedef long double ld;
 #define se second
 #define pb push_back
 #define mp make_pair
-#define all(v) (v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define SZ(x) ((int)((x).size()))
+#define pow2(x) ((ll)(x) * (x))
 const ll mod = 1e9 + 7;
-const int maxn = 1e6 + 5;
-int dp[maxn];
+const int INF = 1e9 + 5;
+const ll INFF = 1e18 + 5;
+const int maxn = 1e5 + 5;
+vi adj[maxn];
+bool happy;
+
 // Super is a cute girl
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    memset(dp, 0, sizeof(dp));
-    int a[n];
-    dp[0] = 1;
-    for (int i = 0; i < n; i++)
+    int n, m;
+    cin >> n >> m;
+    string s;
+    cin >> s;
+    for (int i = 0; i < n - 1; i++)
     {
-        cin >> a[i];
+        int a, b;
+        cin >> a >> b;
+        adj[--a].pb(--b);
+        adj[b].pb(a);
     }
-    for (auto i : a)
+    for (int i = 0; i < m; i++)
     {
-
-        for (int j = 1; j <= k; j++)
-        {
-            int left = j - i;
-            if (left >= 0)
-            {
-                dp[j] += dp[j - i];
-                dp[j] %= mod;
-            }
-        }
+        int a, b;
+        char c;
+        cin >> a >> b >> c;
+        happy = false;
     }
-    cout << dp[k];
 }
 int main()
 {

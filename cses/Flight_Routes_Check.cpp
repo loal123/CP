@@ -17,50 +17,53 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
+const int maxn = 1e5 + 5;
+vi adj[maxn][2];
+bool vis[maxn];
+void dfs(int v, int x)
 {
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
+    vis[v] = true;
+    for (auto i : adj[v][x])
     {
-        return;
+        if (!vis[i])
+            dfs(i, x);
     }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
 }
 
 void solve()
 {
-
+    int n, m;
     cin >> n >> m;
-
+    vector<pii> cant;
+    for (int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[--a][0].pb(--b);
+        adj[b][1].pb(a);
+    }
+    dfs(0, 0);
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        if (!vis[i])
         {
-            cin >> a[i][j];
+            cout << "NO\n"
+                 << 1 << " " << i + 1 << '\n';
+            return;
         }
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
+    memset(vis, false, sizeof(vis));
+    dfs(0, 1);
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        if (!vis[i])
         {
-            if (a[i][j] == '.' && !visited[i][j])
-            {
-                floodfill(i, j);
-                ans++;
-            }
+            cout << "NO\n"
+                 << i + 1 << " " << 1 << '\n';
+            return;
         }
     }
-    cout << ans;
+    cout << "YES";
 }
 int main()
 {

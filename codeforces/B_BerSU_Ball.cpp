@@ -17,50 +17,45 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
-{
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
-    {
-        return;
-    }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
-}
-
 void solve()
 {
-
-    cin >> n >> m;
-
+    int n;
+    cin >> n;
+    int a[n];
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> a[i][j];
-        }
+        cin >> a[i];
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
-    for (int i = 0; i < n; i++)
+    int m;
+    cin >> m;
+    int b[m];
+    for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j < m; j++)
+        cin >> b[i];
+    }
+    sort(a, a + n);
+    sort(b, b + m);
+    int i = 0, j = 0;
+    int counts = 0;
+    while (i < n && j < m)
+    {
+        if (abs(a[i] - b[j]) <= 1)
         {
-            if (a[i][j] == '.' && !visited[i][j])
+            counts++;
+            i++;
+            j++;
+        }
+        else
+        {
+            if (a[i] > b[j])
             {
-                floodfill(i, j);
-                ans++;
+                j++;
             }
+            else
+                i++;
         }
     }
-    cout << ans;
+    cout << counts;
 }
 int main()
 {

@@ -17,50 +17,41 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
-{
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
-    {
-        return;
-    }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
-}
-
 void solve()
 {
-
-    cin >> n >> m;
+    int n;
+    cin >> n;
+    ll dp[n + 1][n + 1];
+    char a[n][n];
+    memset(dp, 0, sizeof(dp));
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
+        for (int j = 0; j < n; j++)
             cin >> a[i][j];
-        }
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 0; j < n; j++)
         {
-            if (a[i][j] == '.' && !visited[i][j])
+            dp[i][j] %= mod;
+            if (j == 0 && i == 0)
             {
-                floodfill(i, j);
-                ans++;
+                dp[i][j] = a[i][j] == '.';
+            }
+            if (i + 1 < n)
+            {
+                if (a[i + 1][j] == '.')
+                    dp[i + 1][j] += dp[i][j];
+            }
+            if (j + 1 < n)
+            {
+                if (a[i][j + 1] == '.')
+                    dp[i][j + 1] += dp[i][j];
             }
         }
     }
-    cout << ans;
+    cout << dp[n - 1][n - 1];
 }
 int main()
 {

@@ -16,51 +16,41 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
+const ll weirdmod = 998244353;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
-{
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
-    {
-        return;
-    }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
-}
 
 void solve()
 {
+    int q, k;
+    cin >> q >> k;
+    int dp[5005];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = 1;
 
-    cin >> n >> m;
+    while (q--)
+    {
+        char s;
+        int x;
+        cin >> s >> x;
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
+        if (s == '+')
         {
-            cin >> a[i][j];
-        }
-    }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            if (a[i][j] == '.' && !visited[i][j])
+            for (int i = k; i >= x; i--)
             {
-                floodfill(i, j);
-                ans++;
+                dp[i] += dp[i - x];
+                dp[i] %= weirdmod;
             }
         }
+        else
+        {
+            for (int i = x; i <= k; i++)
+            {
+                dp[i] += (weirdmod - dp[i - x]);
+                dp[i] %= weirdmod;
+            }
+        }
+        cout << dp[k] << '\n';
     }
-    cout << ans;
 }
 int main()
 {

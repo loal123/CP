@@ -10,36 +10,38 @@ typedef long double ld;
 #define se second
 #define pb push_back
 #define mp make_pair
-#define all(v) (v.begin(), v.end())
+#define all(v) v.begin(), v.end()
+#define SZ(x) ((int)((x).size()))
+#define pow2(x) ((ll)(x) * (x))
 const ll mod = 1e9 + 7;
-const int maxn = 1e6 + 5;
-int dp[maxn];
+const int INF = 1e9 + 5;
+const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
-    memset(dp, 0, sizeof(dp));
-    int a[n];
-    dp[0] = 1;
+    int n;
+    cin >> n;
+    ll a[n];
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
-    for (auto i : a)
+    ll realm = -INFF;
+    ll maxi = -INFF;
+    ll mini = INFF;
+    for (int i = 0; i < n - 1; i++)
     {
-
-        for (int j = 1; j <= k; j++)
+        if (a[i] > a[i + 1])
         {
-            int left = j - i;
-            if (left >= 0)
-            {
-                dp[j] += dp[j - i];
-                dp[j] %= mod;
-            }
+            maxi = max(a[i], maxi);
+        }
+        else if (maxi != -INFF)
+        {
+            realm = max(maxi - a[i], realm);
         }
     }
-    cout << dp[k];
+
+    cout << (int)log2(realm) << '\n';
 }
 int main()
 {
@@ -47,6 +49,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

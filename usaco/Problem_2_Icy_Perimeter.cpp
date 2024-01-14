@@ -16,51 +16,39 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
-// Super is a cute girl
 const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
+int n;
 bool visited[maxn][maxn];
-void floodfill(int r, int c)
+char ice[maxn][maxn];
+// Super is a cute girl
+void flood(int r, int c, int &maxx, int &minx, int &maxy, int &miny)
 {
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
+    if (r < 0 || r >= n || c < 0 || c >= n || ice[r][c] == '.' || visited[r][c])
     {
         return;
     }
-
     visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
 }
-
 void solve()
 {
 
-    cin >> n >> m;
-
+    cin >> n;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 0; j < n; j++)
         {
-            cin >> a[i][j];
+            cin >> ice[i][j];
         }
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        for (int j = 0; j < n; j++)
         {
-            if (a[i][j] == '.' && !visited[i][j])
+            if (ice[i][j] == '#' && !visited[i][j])
             {
-                floodfill(i, j);
-                ans++;
             }
         }
     }
-    cout << ans;
 }
 int main()
 {

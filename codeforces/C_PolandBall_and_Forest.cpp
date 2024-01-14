@@ -16,51 +16,31 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
+const int maxn = 1e4 + 5;
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
-{
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
-    {
-        return;
-    }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
-}
-
 void solve()
 {
-
-    cin >> n >> m;
-
+    int n;
+    cin >> n;
+    int tree = 0;
+    bool vis[n];
+    int rel[n];
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> a[i][j];
-        }
+        cin >> rel[i];
+        rel[i]--;
+        vis[i] = false;
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            if (a[i][j] == '.' && !visited[i][j])
-            {
-                floodfill(i, j);
-                ans++;
-            }
-        }
+        if (!vis[rel[i]])
+            tree++;
+
+        int d1 = rel[i];
+        int d2 = rel[rel[i]];
+        vis[d1] = vis[d2] = true;
     }
-    cout << ans;
+    cout << tree;
 }
 int main()
 {

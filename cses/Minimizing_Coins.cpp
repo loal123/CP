@@ -16,51 +16,39 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
+const int maxn = 1e6 + 5;
+int dp[maxn];
 // Super is a cute girl
-const int maxn = 1005;
-int n, m;
-char a[maxn][maxn];
-bool visited[maxn][maxn];
-void floodfill(int r, int c)
-{
-    if ((r < 0 || r >= n || c < 0 || c >= m) || a[r][c] != '.' || visited[r][c])
-    {
-        return;
-    }
-
-    visited[r][c] = true;
-    floodfill(r + 1, c);
-    floodfill(r - 1, c);
-    floodfill(r, c + 1);
-    floodfill(r, c - 1);
-}
-
 void solve()
 {
-
-    cin >> n >> m;
+    int n, x;
+    cin >> n >> x;
+    ll a[n];
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
-        {
-            cin >> a[i][j];
-        }
+        cin >> a[i];
     }
-    memset(visited, 0, sizeof(visited));
-    int ans = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i <= maxn; i++)
     {
-        for (int j = 0; j < m; j++)
+        dp[i] = INF;
+    }
+
+    dp[x] = 0;
+    for (int i = x; i >= 1; i--)
+    {
+        for (auto j : a)
         {
-            if (a[i][j] == '.' && !visited[i][j])
+            if (i - j >= 0)
             {
-                floodfill(i, j);
-                ans++;
+                dp[i - j] = min(dp[i - j], dp[i] + 1);
             }
         }
     }
-    cout << ans;
+    if (dp[0] == INF)
+        cout << -1;
+    else
+        cout << dp[0];
 }
 int main()
 {

@@ -19,47 +19,28 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
     int n;
     cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
+    vector<pair<pii, int>> v;
+
     for (int i = 0; i < n; i++)
     {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
+        int a, b, c;
+        cin >> a >> b >> c;
+        v.pb(mp(mp(b, a), c));
     }
     sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
-
-    for (int i = 0; i < n / 2; i++)
+    ll ans = 0;
+    int curr = 0;
+    for (auto i : v)
     {
-        can[v1[i].se] = true;
+        if (curr < i.fi.se)
+        {
+            ans += i.se;
+            curr = i.fi.fi;
+        }
     }
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v2[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        can[v[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cout << can[i];
-    }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
-    {
-        cout << can[i];
-    }
+    cout << ans;
 }
 int main()
 {

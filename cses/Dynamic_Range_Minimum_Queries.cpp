@@ -17,48 +17,31 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
+void recalc(int node)
+{
+    
+}
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
-    int n;
-    cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
+    int n, q;
+    cin >> n >> q;
+    int a[n];
     for (int i = 0; i < n; i++)
     {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
+        cin >> a[i];
     }
-    sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
+    while(q--)
+    {
+        int d,x,y;
+        cin >> d >> x >> y;
+        if (d == 1)
+        {
 
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v1[i].se] = true;
-    }
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v2[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        can[v[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cout << can[i];
-    }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
-    {
-        cout << can[i];
+        }
+        else
+        {
+
+        }
     }
 }
 int main()

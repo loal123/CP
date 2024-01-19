@@ -17,36 +17,33 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-int ans = 0;
-
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    vl high;
-    for (int i = 0; i < n; i++)
+    vector<pii> v;
+    int xmin = INF;
+    int xmax = -INF;
+    int ymin = INF;
+    int ymax = -INF;
+    for (int i = 0; i < 4; i++)
     {
-        cin >> a[i];
-    }
-    int ans = 1;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            if (a[j] < a[i])
-                ans++;
-        }
+        int a, b;
+        cin >> a >> b;
+        xmin = min(xmin, a);
+        xmax = max(xmax, a);
+        ymin = min(ymin, b);
+        ymax = max(ymax, b);
     }
 
-    cout << ans;
-}
+    cout << (ll)(xmax - xmin) * (ymax - ymin) << endl;
+}]
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

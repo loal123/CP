@@ -19,39 +19,51 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    ll n, m;
+    int n, m;
     cin >> n >> m;
-    vector<pair<double, int>> v1;
-    vector<pair<double, int>> v0;
-    vector<pair<pair<double, pii>, int>> v;
+    vi v;
+    vi dv;
     for (int i = 0; i < n; i++)
     {
-        int h, w, d;
-        cin >> h >> w >> d;
-
-        v.pb(mp(mp((double)w / h, mp(h, w)), d));
+        int z;
+        cin >> z;
+        v.pb(z);
     }
-    ll ans = 0;
-
-    sort(v.rbegin(), v.rend());
+    for (int i = 0; i < m; i++)
+    {
+        int z;
+        cin >> z;
+        dv.pb(z);
+    }
+    deque<int> dq;
+    sort(all(v));
+    deque<int> dqv;
+    sort(all(dv));
+    for (auto i : dv)
+    {
+        dq.pb(i);
+    }
     for (auto i : v)
     {
-        if (i.se == 1)
+        dqv.pb(i);
+    }
+    ll ans = 0;
+    while (dqv.size() > 0)
+        if (abs(dqv.back() - dq.front()) > abs(dqv.front() - dq.back()))
         {
-            if (m - i.fi.se.fi >= 0)
-            {
-                ans += i.fi.se.se;
-                m -= i.fi.se.fi;
-            }
+            ans += abs(dqv.back() - dq.front());
+            dq.pop_front();
+            dqv.pop_back();
         }
         else
         {
-            ans += (ll)m / i.fi.se.fi * i.fi.se.se;
-            m -= m / i.fi.se.fi * i.fi.se.fi;
+            ans += abs(dqv.front() - dq.back());
+            dq.pop_back();
+            dqv.pop_front();
         }
-    }
 
     cout << ans;
+    cout << endl;
 }
 int main()
 {
@@ -59,6 +71,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

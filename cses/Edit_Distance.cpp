@@ -19,39 +19,43 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    vector<pair<double, int>> v1;
-    vector<pair<double, int>> v0;
-    vector<pair<pair<double, pii>, int>> v;
-    for (int i = 0; i < n; i++)
-    {
-        int h, w, d;
-        cin >> h >> w >> d;
+    string s1, s2;
+    cin >> s1 >> s2;
 
-        v.pb(mp(mp((double)w / h, mp(h, w)), d));
-    }
-    ll ans = 0;
+    int n = SZ(s1);
+    int m = SZ(s2);
+    int dp[n + 1][m + 1];
 
-    sort(v.rbegin(), v.rend());
-    for (auto i : v)
+    for (int i = 0; i <= n; i++)
     {
-        if (i.se == 1)
+        for (int j = 0; j <= m; j++)
         {
-            if (m - i.fi.se.fi >= 0)
+            dp[i][j] = INF;
+        }
+    }
+
+    dp[0][0] = 0;
+
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= m; j++)
+        {
+            if (i != 0)
             {
-                ans += i.fi.se.se;
-                m -= i.fi.se.fi;
+                dp[i][j] = min(dp[i][j], dp[i - 1][j] + 1);
+            }
+            if (j != 0)
+            {
+                dp[i][j] = min(dp[i][j], dp[i][j - 1] + 1);
+            }
+            if (i != 0 && j != 0)
+            {
+                int cost = dp[i - 1][j - 1] + (s1[i - 1] != s2[j - 1]);
+                dp[i][j] = min(dp[i][j], cost);
             }
         }
-        else
-        {
-            ans += (ll)m / i.fi.se.fi * i.fi.se.se;
-            m -= m / i.fi.se.fi * i.fi.se.fi;
-        }
     }
-
-    cout << ans;
+    cout << dp[n][m];
 }
 int main()
 {

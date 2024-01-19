@@ -19,47 +19,51 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
-    int n;
+    short a[26];
+    short n;
     cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
-    for (int i = 0; i < n; i++)
-    {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
-    }
-    sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
+    memset(a, 0, sizeof(a));
 
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v1[i].se] = true;
-    }
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v2[i].se] = true;
-    }
     for (int i = 0; i < n; i++)
     {
-        can[v[i].se] = true;
+        char c;
+        cin >> c;
+        a[c - 'A']++;
     }
-    for (int i = 0; i < n; i++)
+    bool cant = false;
+    sort(a, a + 26, greater<int>());
+    short ans = 0;
+    while (1)
     {
-        cout << can[i];
+        for (int i = 0; i < 3; i++)
+        {
+
+            if (a[i] > 0)
+            {
+                ans++;
+                a[i]--;
+            }
+            else
+            {
+                cant = true;
+                break;
+            }
+        }
+        if (cant)
+            break;
     }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
-    {
-        cout << can[i];
-    }
+
+    cout << (ans >= 3 ? ans : -1);
+
+    /*
+    K = 1
+    L = 3
+    S = 3
+    P = 1
+    S = 1
+
+    3 3 1  1 1
+    */
 }
 int main()
 {

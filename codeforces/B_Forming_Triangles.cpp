@@ -17,29 +17,47 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-int ans = 0;
+ll choose(ll n, ll r)
+{
+    ll result = 1;
+    ll i;
+    for (i = 0; i < r; i++)
+    {
+        result *= (n - i);
+        result /= (i + 1);
+    }
+    return result;
+}
 
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-    ll a[n];
-    vl high;
-    for (int i = 0; i < n; i++)
+    vi a(n);
+    ll num[n + 1];
+    memset(num, 0, sizeof(num));
+    for (ll i = 0; i < n; i++)
     {
         cin >> a[i];
+        num[a[i]]++;
     }
-    int ans = 1;
-    for (int i = 0; i < n; i++)
+    sort(all(a));
+    vi pref;
+    for (ll i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j < i; j++)
-        {
-            if (a[j] < a[i])
-                ans++;
-        }
+        pref.pb(a[i] + a[i + 1]);
     }
 
-    cout << ans;
+    ll ans = 0;
+    ll curr = 0;
+    for (ll i = 0; i <= n; i++)
+    {
+        ans += num[i] * (num[i] - 1) * (num[i] - 2) / 6;
+        ans += num[i] * (num[i] - 1) / 2 * curr;
+        curr += num[i];
+    }
+
+    cout << ans << '\n';
 }
 int main()
 {
@@ -47,6 +65,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

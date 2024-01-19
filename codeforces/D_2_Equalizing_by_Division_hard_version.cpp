@@ -17,49 +17,41 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
+const int maxn = 200 * 1000 + 5;
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
-    int n;
-    cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
-    for (int i = 0; i < n; i++)
-    {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
-    }
-    sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
 
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v1[i].se] = true;
-    }
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v2[i].se] = true;
-    }
+    int n, k;
+    cin >> n >> k;
+
+    bool can = false;
+
+    int a[n];
     for (int i = 0; i < n; i++)
     {
-        can[v[i].se] = true;
+        cin >> a[i];
     }
+    vector<vector<int>> v(maxn);
     for (int i = 0; i < n; i++)
     {
-        cout << can[i];
+        int x = a[i];
+        int cur = 0;
+        while (x > 0)
+        {
+            v[x].pb(cur);
+            x /= 2;
+            ++cur;
+        }
     }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
+    int mini = INF;
+    for (int i = 0; i <= maxn; i++)
     {
-        cout << can[i];
+        sort(all(v[i]));
+        if (v[i].size() < k)
+            continue;
+        mini = min(mini, accumulate(v[i].begin(), v[i].begin() + k, 0));
     }
+    cout << mini;
 }
 int main()
 {

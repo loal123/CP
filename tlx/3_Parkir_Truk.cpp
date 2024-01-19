@@ -17,28 +17,35 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-int ans = 0;
-
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    vl high;
-    for (int i = 0; i < n; i++)
+    int a, b, c;
+    cin >> a >> b >> c;
+    int x[3];
+    int y[3];
+    for (int i = 0; i < 3; i++)
     {
-        cin >> a[i];
+        cin >> x[i] >> y[i];
     }
-    int ans = 1;
-    for (int i = 0; i < n; i++)
+    int ans = 0;
+    int rn = 0;
+    while (rn < 102)
     {
-        for (int j = 0; j < i; j++)
+        int counts = 0;
+        for (int i = 0; i < 3; i++)
         {
-            if (a[j] < a[i])
-                ans++;
+            if (rn >= x[i] && rn < y[i])
+                counts++;
         }
-    }
+        if (counts == 1)
+            ans += a;
+        else if (counts == 2)
+            ans += 2 * b;
+        else if (counts == 3)
+            ans += 3 * c;
 
+        rn++;
+    }
     cout << ans;
 }
 int main()

@@ -19,47 +19,46 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
-    int n;
-    cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
+    int n, k;
+    cin >> n >> k;
+    int bef[n];
+    int aft[n];
+    vector<pii> diff(n);
     for (int i = 0; i < n; i++)
     {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
+        cin >> bef[i];
     }
-    sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
+    vi have;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> aft[i];
+        if (bef[i] - aft[i] > 0)
+            diff[i].fi = bef[i] - aft[i];
+        else
+        {
+            have.pb(i);
+        }
+        diff[i].se = i;
+    }
+    sort(all(diff));
 
-    for (int i = 0; i < n / 2; i++)
+    int ans = 0;
+    int rn = 0;
+    for (auto i : have)
     {
-        can[v1[i].se] = true;
+        ans += bef[i];
+        rn++;
     }
-    for (int i = 0; i < n / 2; i++)
+    for (; rn < k; rn++)
     {
-        can[v2[i].se] = true;
+        ans += bef[diff[rn].se];
     }
-    for (int i = 0; i < n; i++)
+    for (; rn < n; rn++)
     {
-        can[v[i].se] = true;
+        ans += aft[diff[rn].se];
     }
-    for (int i = 0; i < n; i++)
-    {
-        cout << can[i];
-    }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
-    {
-        cout << can[i];
-    }
+
+    cout << ans;
 }
 int main()
 {

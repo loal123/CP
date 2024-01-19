@@ -17,29 +17,36 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is a cute girl
-int ans = 0;
-
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    vl high;
-    for (int i = 0; i < n; i++)
+    string s;
+    cin >> s;
+    int i = 1;
+    bool can = false;
+    int real;
+    int reall;
+    while (i < s.size())
     {
-        cin >> a[i];
-    }
-    int ans = 1;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < i; j++)
+        if (s[i] != '0' && s[0] != '0')
         {
-            if (a[j] < a[i])
-                ans++;
+            string a = s.substr(0, i);
+            string b = s.substr(i, s.size() - i);
+            if (stoi(a) < stoi(b))
+            {
+                can = true;
+                real = stoi(a);
+                reall = stoi(b);
+            }
         }
+        i++;
     }
 
-    cout << ans;
+    if (can)
+        cout << real << " " << reall;
+    else
+        cout << -1;
+
+    cout << '\n';
 }
 int main()
 {
@@ -47,6 +54,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

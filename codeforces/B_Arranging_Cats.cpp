@@ -19,47 +19,38 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    vector<pii> v;
-    vector<pii> v1;
-    vector<pii> v2;
     int n;
     cin >> n;
-    bool can[n * 2];
-    memset(can, 0, sizeof(can));
+    string s, f;
+    cin >> s >> f;
+    int ans = 0;
+    int counts1 = 0;
+    int counts2 = 0;
     for (int i = 0; i < n; i++)
     {
-        int x, y;
-        cin >> x >> y;
-        v.pb(mp(x, i));
-        v.pb(mp(y, n + i));
-        v1.pb(mp(x, i));
-        v2.pb(mp(y, n + i));
+        if (s[i] == '1')
+            counts1++;
+        else if (f[i] == '1')
+            counts2++;
     }
-    sort(all(v));
-    sort(all(v1));
-    sort(all(v2));
+    int rn = 0;
+    int yeah = 0;
+    int yeahh = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] != f[i])
+        {
+            if (s[i] == '0')
+                yeah++;
+            else
+                yeahh++;
+        }
+    }
+    ans += min(yeah, yeahh);
 
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v1[i].se] = true;
-    }
-    for (int i = 0; i < n / 2; i++)
-    {
-        can[v2[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        can[v[i].se] = true;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cout << can[i];
-    }
-    cout << endl;
-    for (int i = n; i < n * 2; i++)
-    {
-        cout << can[i];
-    }
+    ans += abs(yeah - yeahh);
+
+    cout << (ans) << endl;
 }
 int main()
 {
@@ -67,6 +58,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

@@ -16,40 +16,45 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
-// Super is a cute girl
+// Super is the cutest girl
+set<string> S;
+set<string> have;
+void dp(string s, int i, int size, string rn, int n)
+{
+
+    if (SZ(rn) > n)
+        return;
+
+    if (SZ(rn) == n)
+        S.insert(rn);
+    if (i == size)
+        return;
+    dp(s, i + 1, size, rn + s[i], n);
+    dp(s, i + 1, size, rn, n);
+}
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    for (int i = 0; i < n; i++)
+    int n, k, size;
+    string s;
+    cin >> n >> k >> size;
+    cin >> s;
+    dp(s, 0, SZ(s), "", n);
+    if (S.size() == pow(k, n))
+        cout << "YES";
+    else
     {
-        cin >> a[i];
-    }
-    int curr = 1;
-    bool have = false;
-
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] > a[i + 1])
+        cout << "NO";
+        sort(all(s));
+        for (auto i : s)
         {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
         }
     }
-}
 
+    cout << endl;
+
+    S.clear();
+    have.clear();
+}
 int main()
 {
     ios::sync_with_stdio(false);

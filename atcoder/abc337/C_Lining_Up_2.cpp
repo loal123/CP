@@ -21,43 +21,36 @@ void solve()
 {
     int n;
     cin >> n;
-    ll a[n];
-    for (int i = 0; i < n; i++)
+    int a[n + 1];
+    deque<int> d;
+    map<int, int> m;
+    int front;
+    for (int i = 1; i <= n; i++)
     {
         cin >> a[i];
+        if (a[i] == -1)
+            front = i;
     }
-    int curr = 1;
-    bool have = false;
-
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 1; i <= n; i++)
     {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
+        if (a[i] != -1)
+            m[a[i]] = i;
+    }
+    int bruh = front;
+    n--;
+    cout << front << " ";
+    while (n--)
+    {
+        cout << m[bruh] << " ";
+        bruh = m[bruh];
     }
 }
-
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

@@ -19,37 +19,28 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    int curr = 1;
-    bool have = false;
+    int a, b;
+    cin >> a >> b;
+    int xk, xy;
+    cin >> xk >> xy;
+    int qx, qy;
+    cin >> qx >> qy;
 
-    for (int i = 0; i < n - 1; i++)
+    int distx = abs(qx - xk);
+    int disty = abs(qy - xy);
+    bool can1 = false;
+    int ans = 0;
+    if (abs(qx - a) == abs(xk - b) && abs(qy - b) == abs(xy - a))
     {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
+        ans++;
     }
+    if (abs(qx - b) == abs(xk - a) && abs(qy - a) == abs(xy - b))
+    {
+        ans++;
+    }
+
+    cout << ans << endl;
 }
-
 int main()
 {
     ios::sync_with_stdio(false);

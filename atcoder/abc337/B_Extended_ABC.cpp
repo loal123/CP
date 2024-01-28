@@ -19,45 +19,23 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    for (int i = 0; i < n; i++)
+    string s;
+    cin >> s;
+    bool can = true;
+    for (int i = 0; i < SZ(s) - 1; i++)
     {
-        cin >> a[i];
+        if (s[i] > s[i + 1])
+            can = false;
     }
-    int curr = 1;
-    bool have = false;
 
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
-    }
+    cout << (can ? "Yes" : "No");
 }
-
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

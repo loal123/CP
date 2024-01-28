@@ -19,45 +19,25 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
+    int n, k, d;
+    cin >> n >> k >> d;
+    int t[n];
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> t[i];
     }
-    int curr = 1;
-    bool have = false;
-
-    for (int i = 0; i < n - 1; i++)
+    sort(t, t + n);
+    for (int i = 0; i < n; i++)
     {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
+        
     }
 }
-
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

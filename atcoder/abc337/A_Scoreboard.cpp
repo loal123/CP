@@ -21,43 +21,28 @@ void solve()
 {
     int n;
     cin >> n;
-    ll a[n];
+    int c1 = 0;
+    int c2 = 0;
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
+        int a, b;
+        cin >> a >> b;
+        c1 += a;
+        c2 += b;
     }
-    int curr = 1;
-    bool have = false;
-
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
-    }
+    if (c1 > c2)
+        cout << "Takahashi";
+    else if (c1 < c2)
+        cout << "Aoki";
+    else
+        cout << "Draw";
 }
-
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

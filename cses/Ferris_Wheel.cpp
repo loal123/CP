@@ -19,40 +19,65 @@ const ll INFF = 1e18 + 5;
 // Super is the cutest girl
 void solve()
 {
-    int n, m, k;
-    cin >> n >> m >> k;
-    vi a(n);
-    vi b(m);
+    int n, x;
+    cin >> n >> x;
+    int ans = 1;
+    vl a(n);
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
-    for (int i = 0; i < m; i++)
-    {
-        cin >> b[i];
-    }
     sort(all(a));
-    sort(all(b));
-    int ans = 0;
-    int i = 0, j = 0;
-    while (i < n && j < m)
+    int i = 0;
+    ll curr = 0;
+    int j = n - 1;
+    int yeah = 0;
+    while (i <= j)
     {
-        if (abs(a[i] - b[j]) <= k)
+        if (curr + a[i] > x)
         {
             ans++;
-            i++;
-            j++;
-        }
-        else if (a[i] - b[j] > k)
-        {
-            j++;
+            curr = a[i];
+            yeah = 1;
         }
         else
-            i++;
+        {
+            curr += a[i];
+            yeah++;
+        }
+        i++;
+
+        if (i > j)
+            break;
+        if (yeah == 2)
+        {
+            ans++;
+            curr = 0;
+            yeah = 0;
+        }
+
+        if (curr + a[j] > x)
+        {
+            ans++;
+            curr = a[j];
+            yeah = 1;
+        }
+        else
+        {
+            curr += a[j];
+            yeah++;
+        }
+
+        j--;
+
+        if (yeah == 2)
+        {
+            ans++;
+            curr = 0;
+            yeah = 0;
+        }
     }
     cout << ans;
-    // 45 60 60 80
-    // 30 60 75
 }
 int main()
 {

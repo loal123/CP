@@ -30,18 +30,18 @@ void build(ll a[], int v, int tl, int tr)
         int tm = (tl + tr) / 2;
         build(a, v * 2, tl, tm);
         build(a, v * 2 + 1, tm + 1, tr);
-        t[v] = min(t[v * 2], t[v * 2 + 1]);
+        t[v] = t[v * 2] + t[v * 2 + 1];
     }
 }
-ll mini(int v, int tl, int tr, int l, int r)
+ll sum(int v, int tl, int tr, int l, int r)
 {
     if (l > r)
-        return INFF;
+        return 0;
     if (l == tl && r == tr)
         return t[v];
 
     int tm = (tl + tr) / 2;
-    return min(mini(v * 2, tl, tm, l, min(r, tm)), mini(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r));
+    return sum(v * 2, tl, tm, l, min(r, tm)) + sum(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
 }
 void update(int v, int tl, int tr, int pos, ll new_val)
 {
@@ -54,7 +54,7 @@ void update(int v, int tl, int tr, int pos, ll new_val)
             update(v * 2, tl, tm, pos, new_val);
         else
             update(v * 2 + 1, tm + 1, tr, pos, new_val);
-        t[v] = min(t[v * 2], t[v * 2 + 1]);
+        t[v] = t[v * 2] + t[v * 2 + 1];
     }
 }
 // Super is the cutest girl
@@ -78,7 +78,7 @@ void solve()
         }
         else
         {
-            cout << mini(1, 0, n - 1, x - 1, y - 1) << '\n';
+            cout << sum(1, 0, n - 1, x - 1, y - 1) << '\n';
         }
     }
 }

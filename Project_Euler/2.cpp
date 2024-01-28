@@ -16,48 +16,32 @@ typedef long double ld;
 const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
-// Super is a cute girl
+// Super is the cutest girl
 void solve()
 {
-    int n;
-    cin >> n;
-    ll a[n];
-    for (int i = 0; i < n; i++)
+    int fib[100];
+    fib[0] = 0;
+    fib[1] = 1;
+    for (int i = 2; i < 100; i++)
     {
-        cin >> a[i];
+        fib[i] = fib[i - 1] + fib[i - 2];
+        if (fib[i] > 4e6)
+            break;
     }
-    int curr = 1;
-    bool have = false;
-
-    for (int i = 0; i < n - 1; i++)
+    ll counts = 0;
+    for (int i = 0; fib[i] <= 4e6; i++)
     {
-        if (a[i] > a[i + 1])
-        {
-            if (!have)
-            {
-
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
-        }
+        counts += (!(fib[i] & 1) ? fib[i] : 0);
     }
+
+    cout << counts;
 }
-
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    int t;
-    cin >> t;
-    while (t--)
-        solve();
+    // int t; cin >> t; while(t--)
+    solve();
 }

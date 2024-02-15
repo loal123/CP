@@ -28,26 +28,20 @@ void solve()
     }
     int curr = 1;
     bool have = false;
+    int maxi = 0;
 
     for (int i = 0; i < n - 1; i++)
     {
         if (a[i] > a[i + 1])
         {
-            if (!have)
-            {
+            unsigned int bruh = a[i] - a[i + 1];
+            int yeah = __builtin_clz((unsigned int)0) - __builtin_clz(bruh);
 
-                while (a[i] > a[i + 1] + curr)
-                {
-                    curr <<= 1;
-                }
-                have = true;
-            }
-            else
-            {
-                int yeah = curr;
-            }
+            maxi = max(yeah, maxi);
+            a[i + 1] = a[i];
         }
     }
+    cout << maxi << endl;
 }
 
 int main()

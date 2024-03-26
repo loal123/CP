@@ -45,6 +45,16 @@ void solve()
     }
     ll counts = 0;
     int i = 0, j = 0;
+    int maxi = -1;
+
+    for (int i = 0; i < n; i++)
+    {
+        while (yeah[j] && counts <= x)
+        {
+            j++;
+            counts += j;
+        }
+        }
     while (j < n)
     {
         if (yeah[j])

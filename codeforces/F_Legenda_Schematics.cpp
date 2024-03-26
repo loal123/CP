@@ -27,7 +27,7 @@ void solve()
 
         int m;
         cin >> m;
-        ll maxsum = -1e18;
+        ll maxsum = -1;
         ll cursum = 0;
         for (int i = 0; i < m; i++)
         {

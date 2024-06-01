@@ -25,7 +25,8 @@ void solve()
     int yeah = lcm(q, s);
     p *= yeah / q;
     r *= yeah / s;
-    cout << p / gcd(p, r) + r / gcd(p, r) << " " << yeah;
+    int xd = p / gcd(p, r) + r / gcd(p, r);
+    cout << xd / gcd(xd, yeah) << " " << yeah / gcd(xd, yeah);
 }
 int main()
 {

@@ -19,14 +19,69 @@ const ll INFF = 1e18 + 5;
 // Super is the cutest girl
 const int maxn = 1 << 17;
 int t[4 * maxn];
-void build void solve()
+int depth;
+int n, q;
+void build(int a[], int v, int tl, int tr)
 {
-    int n, q;
+    if (tl == tr)
+    {
+        t[v] = a[tl];
+    }
+    else
+    {
+        int tm = (tl + tr) / 2;
+        build(a, v * 2, tl, tm);
+        build(a, v * 2 + 1, tm + 1, tr);
+        if (__lg(v) % 2 != n % 2)
+        {
+            t[v] = t[v * 2] | t[v * 2 + 1];
+        }
+        else
+            t[v] = t[v * 2] ^ t[v * 2 + 1];
+    }
+}
+void update(int v, int tl, int tr, int pos, int val)
+{
+    if (tl == tr)
+    {
+        t[v] = val;
+    }
+    else
+    {
+        int tm = (tl + tr) / 2;
+        if (pos <= tm)
+            update(v * 2, tl, tm, pos, val);
+        else
+            update(v * 2 + 1, tm + 1, tr, pos, val);
+
+        if (__lg(v) % 2 != n % 2)
+        {
+            t[v] = t[v * 2] | t[v * 2 + 1];
+        }
+        else
+            t[v] = t[v * 2] ^ t[v * 2 + 1];
+    }
+}
+
+void solve()
+{
+
     cin >> n >> q;
-    int a[n];
-    for (int i = 0; i < n; i++)
+
+    int actualn = (1 << n);
+    int a[actualn];
+    for (int i = 0; i < actualn; i++)
     {
         cin >> a[i];
+    }
+    build(a, 1, 0, actualn - 1);
+    while (q--)
+    {
+        int p, b;
+        cin >> p >> b;
+        p--;
+        update(1, 0, actualn - 1, p, b);
+        cout << t[1] << endl;
     }
 }
 int main()

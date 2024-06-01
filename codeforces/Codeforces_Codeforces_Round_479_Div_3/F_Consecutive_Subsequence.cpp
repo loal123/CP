@@ -22,50 +22,46 @@ void solve()
     int n;
     cin >> n;
     int a[n];
-    int p[n + 2];
-    for (int i = 0; i < n; i++)
-    {
-        p[i] = i;
-    }
-    vi dp(n + 5, 1);
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
+    map<int, int> dp;
+    map<int, int> p;
+    map<int, int> last;
+
     for (int i = 0; i < n; i++)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (a[j] - a[i] == 1)
-            {
-                if (dp[i] + 1 > dp[j])
-                {
-                    p[j] = i;
-                    dp[j] = dp[i] + 1;
-                }
-            }
-        }
+
+        if (dp[a[i] - 1] + 1 > dp[a[i]])
+            p[a[i]] = last[a[i] - 1];
+        dp[a[i]] = max(dp[a[i]], dp[a[i] - 1] + 1);
+
+        last[a[i]] = i + 1;
     }
-    int pos;
     int maxi = -1;
-    for (int i = 0; i < n; i++)
+    int pos;
+    for (auto i : dp)
     {
-        if (dp[i] > maxi)
+        if (i.se > maxi)
         {
-            pos = i;
-            maxi = dp[i];
+            maxi = i.se;
+            pos = i.fi;
         }
     }
-    vi v;
-    cout << dp[pos] << '\n';
-    while (p[pos] != pos)
+    vi yeah;
+    int xd = pos;
+    for (int i = n - 1; i >= 0; i--)
     {
-        v.pb(pos + 1);
-        pos = p[pos];
+        if (a[i] == xd)
+        {
+            yeah.pb(i + 1);
+            xd--;
+        }
     }
-    v.pb(pos + 1);
-    reverse(all(v));
-    for (auto i : v)
+    cout << maxi << '\n';
+    sort(all(yeah));
+    for (auto i : yeah)
         cout << i << " ";
 }
 int main()

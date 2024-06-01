@@ -29,6 +29,16 @@ void solve()
     vl b(m);
     for (int i = 0; i < m; i++)
         cin >> b[i];
+
+    ll g = 0;
+    for (int i = 1; i < n; i++)
+    {
+        g = gcd(g, a[i] - a[i - 1]);
+    }
+    for (int i = 0; i < m; i++)
+    {
+        cout << gcd(g, a[0] + b[i]) << " ";
+    }
 }
 int main()
 {

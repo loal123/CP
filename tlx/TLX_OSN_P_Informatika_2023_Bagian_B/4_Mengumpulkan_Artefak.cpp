@@ -19,6 +19,68 @@ const ll INFF = 1e18 + 5;
 // Super is the cutest girl
 void solve()
 {
+    ll n, k, x;
+    cin >> n >> k >> x;
+
+    vl a(n);
+    vl b(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> b[i];
+    }
+
+    ll liters = 0;
+    ll prize = 0;
+    ll max_prize = 0;
+    int l = lower_bound(all(a), x) - a.begin();
+    int currently = l;
+    ll r = l;
+    for (l; l >= 0; l--)
+    {
+        if (l == currently)
+        {
+            liters += currently - a[l];
+        }
+        else
+        {
+            liters += a[l + 1] - a[l];
+        }
+        if (liters > k)
+        {
+            l++;
+            liters -= a[l + 1] - a[l];
+            break;
+        }
+
+        prize += b[l];
+        max_prize = prize;
+    }
+    liters = 0;
+    for (l; l < n; l++)
+    {
+        while (r < n)
+        {
+            if (a[l] < currently)
+            {
+                liters = (currently - a[l]) * 2;
+            }
+            if (liters + (a[r] - currently) > k)
+                break;
+            liters += a[r] - currently;
+
+            prize += b[r];
+        }
+        max_prize = max(max_prize, prize);
+
+        if (a[l] > currently)
+        {
+            
+        }
+    }
 }
 int main()
 {

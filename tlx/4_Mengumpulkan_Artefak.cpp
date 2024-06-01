@@ -19,17 +19,18 @@ const ll INFF = 1e18 + 5;
 // Super is a cute girl
 const int maxn = 1e5;
 ll a[maxn];
-int binarysearch(int x, int size)
-{
-    int x = 0, y = size - 1;
-    while (x != y)
-    {
-        int mid = (x + y) / 2;
-        if (a[mid] >= x)
-        {
-        }
-    }
-}
+// int binarysearch(int x, int size)
+// {
+//     int x = 0, y = size - 1;
+//     while (x != y)
+//     {
+//         int mid = (x + y) / 2;
+//         if (a[mid] >= x)
+//         {
+
+//         }
+//     }
+// }
 
 void solve()
 {
@@ -64,7 +65,7 @@ void solve()
             break;
         }
     }
-    for (int i = n - 1; i >= 0; i++)
+    for (int i = 0; i < n; i++)
     {
         if (a[i] <= right)
         {
@@ -79,7 +80,6 @@ void solve()
         if (rightpos < n - 1)
         {
             int idk = a[rightpos + 1] - a[rightpos];
-            
         }
     }
 }

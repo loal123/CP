@@ -41,6 +41,8 @@ void solve()
         }
     }
     cout << n - *max_element(dp, dp + n + 1);
+    
+    
 }
 int main()
 {

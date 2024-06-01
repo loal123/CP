@@ -21,26 +21,53 @@ void solve()
 {
     int n;
     cin >> n;
-    vi a(n);
-    vi b(n);
+    vector<pii> a(n);
+    vector<pii> b(n);
 
     for (int i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> a[i].fi;
+        a[i].se = i;
     }
     for (int i = 0; i < n; i++)
     {
-        cin >> b[i];
+        cin >> b[i].fi;
+        b[i].se = i;
     }
+
     vector<pii> v;
     for (int i = 0; i < n; i++)
     {
-        v.pb(mp(a[i], b[i]));
+        v.pb({a[i].fi + b[i].fi, i});
     }
     sort(v.rbegin(), v.rend());
+
     for (int i = 0; i < n; i++)
     {
+        if (i & 1)
+        {
+            a[v[i].se].fi = 0;
+            b[v[i].se].fi--;
         }
+        else
+        {
+            b[v[i].se].fi = 0;
+            a[v[i].se].fi--;
+        }
+    }
+
+    ll ans = 0;
+
+    for (auto i : a)
+        ans += i.fi;
+
+    for (auto i : b)
+        ans -= i.fi;
+
+    // 1 2 4
+    // 1 2 4
+
+    cout << ans << endl;
 }
 int main()
 {
@@ -48,6 +75,8 @@ int main()
     cin.tie(0);
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // int t; cin >> t; while(t--)
-    solve();
+    int t;
+    cin >> t;
+    while (t--)
+        solve();
 }

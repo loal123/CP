@@ -38,14 +38,16 @@ void solve()
         if (s.size() == 1)
         {
 
-            for (auto i : s)
+            for (auto k : s)
             {
-                if (i != '.')
-                    cout << i << '\n';
+                if (k != '.')
+                {
+                    cout << k << '\n';
+                    return;
+                }
                 else
                     continue;
             }
-            return;
         }
     }
     for (int i = 0; i < n; i++)
@@ -57,14 +59,16 @@ void solve()
         }
         if (s.size() == 1)
         {
-            for (auto i : s)
+            for (auto k : s)
             {
-                if (i != '.')
-                    cout << i << '\n';
+                if (k != '.')
+                {
+                    cout << k << '\n';
+                    return;
+                }
                 else
                     continue;
             }
-            return;
         }
     }
 }

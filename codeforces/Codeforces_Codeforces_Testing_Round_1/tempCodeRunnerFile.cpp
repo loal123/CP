@@ -1,0 +1,1 @@
+        v.pb(stoi(curr));

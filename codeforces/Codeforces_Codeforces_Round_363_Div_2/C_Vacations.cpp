@@ -26,28 +26,23 @@ void solve()
     {
         cin >> a[i];
     }
-    int dp[3][n + 1];
-    int counts = 0;
+    int dp[n + 2][3];
     memset(dp, 0, sizeof(dp));
+    int ans = 0;
+
     for (int i = 1; i <= n; i++)
     {
-        if (a[i] == 1)
+        dp[i][0] = max({dp[i - 1][0], dp[i - 1][1], dp[i - 1][2]});
+        if (a[i] == 1 || a[i] == 3)
         {
-            dp[1][i] = max(dp[0][i - 1] + 1, dp[2][i - 1] + 1);
+            dp[i][1] = max(dp[i - 1][0], dp[i - 1][2]) + 1;
         }
-        else if (a[i] == 2)
+        if (a[i] == 2 || a[i] == 3)
         {
-            dp[2][i] = max(dp[1][i - 1] + 1, dp[0][i - 1] + 1);
+            dp[i][2] = max(dp[i - 1][0], dp[i - 1][1]) + 1;
         }
-        else if (a[i] == 3)
-        {
-            dp[1][i] = max(dp[0][i - 1] + 1, dp[2][i - 1] + 1);
-            dp[2][i] = max(dp[1][i - 1] + 1, dp[0][i - 1] + 1);
-        }
-
-        dp[0][i] = max(dp[1][i - 1], dp[2][i - 1]);
     }
-    cout << n - max({dp[0][n], dp[1][n], dp[2][n]});
+    cout << n - max({dp[n][0], dp[n][1], dp[n][2]});
 }
 int main()
 {

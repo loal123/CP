@@ -1,27 +1,23 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-#define ll long long
+
+// Super is the cutest girl
+void solve()
+{
+    short n, m;
+    cin >> n >> m;
+
+    if (n > m)
+        swap(n, m);
+
+    cout << (m - 1) * m / 2 + (n * (m + m + n * 2 - 2) / 2);
+}
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    ll total = n * m;
-    if (n == 1)
-    {
-        ll sumtotal = (ll)(total) * (total + 1) / 2;
-        cout << sumtotal;
-    }
-    else if (n == 2)
-    {
-        ll sumtotal = (ll)(total) * (total + 1) / 2;
-        ll negsum = 0;
-        for (ll i = total; i > total - m + 2; i--)
-        {
-            negsum += i;
-        }
-
-        negsum += total - m + 1;
-
-        cout << sumtotal - negsum;
-    }
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    // freopen("input.txt","r",stdin);
+    // freopen("output.txt","w",stdout);
+    // int t; cin >> t; while(t--)
+    solve();
 }

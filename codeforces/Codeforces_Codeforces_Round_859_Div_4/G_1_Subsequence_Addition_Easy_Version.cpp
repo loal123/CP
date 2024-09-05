@@ -21,28 +21,9 @@ void solve()
 {
     int n;
     cin >> n;
-    vi v(n);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
-    sort(all(v));
-    int curr = 1;
-    int yeah = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if ((curr & v[i]) == v[i])
-        {
-            yeah += v[i];
-            curr |= yeah;
-        }
-        else
-        {
-            cout << "NO\n";
-            return;
-        }
-    }
-    cout << "YES\n";
+    vi c(n);
+    for (int &i : c)
+        cin >> c[i];
 }
 int main()
 {

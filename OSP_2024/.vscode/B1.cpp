@@ -45,7 +45,7 @@ int main()
         ll ans = 0;
         for (auto i : divisors)
         {
-            if (i > d)
+            if (i > d && i <= b)
             {
                 ans++;
             }

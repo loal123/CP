@@ -17,34 +17,28 @@ const ll mod = 1e9 + 7;
 const int INF = 1e9 + 5;
 const ll INFF = 1e18 + 5;
 // Super is the cutest girl
+string ask(int x)
+{
+    cout << x << endl;
+    string s;
+    cin >> s;
+    return s;
+}
+
 void solve()
 {
     int n, t;
     cin >> n >> t;
-    mt19937 mt(time(nullptr));
-    bool a[20000];
-    int idx = 0;
-    memset(a, 0, sizeof(a));
-    while (1)
+    cout << 1 << endl;
+    for (int i = 2; i <= n; i++)
     {
-        int yeah = mt() % (n + 1);
-        if (yeah == 0 || a[yeah])
-            continue;
-        a[yeah] = true;
-        cout << yeah << endl;
-        t--;
-        if (t == 0)
-            break;
-        idx++;
-
-        if (idx >= 2)
+        if (ask(i) == "PAS")
         {
-            string s;
-            cin >> s;
-            if (s == "OK")
-                return;
+            return;
         }
     }
+    if (ask(5) == "PAS")
+        return;
 }
 int main()
 {

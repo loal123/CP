@@ -40,9 +40,9 @@ void solve()
             dp[has[i][j] + 1] = max(dp[has[i][j] + 1], dp[i] + j + 1);
         }
     }
-    cout << n - *max_element(dp, dp + n + 1);
-    
-    
+    dp[n] = max(dp[n], dp[n - 1]);
+
+    cout << n - dp[n];
 }
 int main()
 {

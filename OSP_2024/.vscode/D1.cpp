@@ -19,14 +19,28 @@ const ll INFF = 1e18 + 5;
 // Super is the cutest girl
 void solve()
 {
-    string a;
+    string s;
     ll b;
-    cin >> a >> b;
-    
+    cin >> s >> b;
+    int n = SZ(s);
+    vl dp(n + 2);
 
-    
+    dp[0] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        ll curr = 0;
+        for (int j = i; j < n; j++)
+        {
+            curr = curr * 10 + s[j] - '0';
 
+            if (curr >= b)
+                break;
 
+            dp[j + 1] += dp[i];
+            dp[j + 1] %= mod;
+        }
+    }
+    cout << dp[n];
 }
 int main()
 {
